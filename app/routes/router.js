@@ -23,10 +23,10 @@ router.post("/classificar", (req, res)=>{
     }else if(dia == 5 ){
         var categoria = "Quinta";
     }else if(dia == 6 ){
-        var categoria = "Sábado";} 
-    else {
-        var categoria = "Dia invalido!!";
-    }
+        var categoria = "Sexta";
+    }else if(dia == 7){
+        var categoria = "Sábado";
+    }else { var categoria = "Dia invalido!!"; }
 
     //formatação 
     let objJson = {"categoria":categoria};
