@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista 1 Exercício 2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista 1 Exercício 2</title>
+<style>
+       .erro{
+           border: 2px solid red;
+       }
+       .msgErro{
+           color: red;
+       }
+</style>
 </head>
 <body>
-
-    <form action="/classificar" method="post">
-
-        <label for="dia">Digite o dia:</label> <br>
-        <input type="text" name="dia" id="dia" value="<%= valores.dia %>"> <br>
-        <button type="submit">Classificar</button>
-
-    </form>
-    <%
-
-        if(retorno){
-            %>
-            <h2>Categoria: <%= retorno.categoria %></h2>
-            <%
-        }else{
-            %>
-            <h2>Não temos retorno</h2>
-            <%
-        }
-
-
-    %>
-
+<%
+       let erroDia = "";
+       let msgErroDia = "";
+       if(erros){
+           erros.forEach(function(item){
+               if(item.path == "dia"){
+                   erroDia = "erro";
+                   msgErroDia = item.msg;
+               }
+           });
+       }
+   %>
+<form action="/classificar" method="post">
+<label for="dia">Digite o dia:</label><br>
+<input
+           type="text"
+           name="dia"
+           id="dia"
+           value="<%= valores.dia %>"
+           class="<%= erroDia %>"
+>
+<span class="msgErro">
+<%= msgErroDia %>
+</span>
+<br><br>
+<button type="submit">Classificar</button>
+</form>
+<% if(retorno){ %>
+<h2>Categoria: <%= retorno.categoria %></h2>
+<% } else { %>
+<h2>Não temos retorno</h2>
+<% } %>
 </body>
 </html>
